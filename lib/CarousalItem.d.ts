@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleProp, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
 interface CarousalItemProps {
-    style?: StyleProp<ViewStyle>;
+    itemStyle?: ViewStyle;
     index: number;
     activeIndex: number;
     children: React.ReactNode;
