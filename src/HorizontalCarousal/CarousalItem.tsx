@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleProp, TouchableOpacity, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 
 interface CarousalItemProps {
-  style?: StyleProp<ViewStyle>;
+  itemStyle?: ViewStyle;
   index: number;
   activeIndex: number;
   children: React.ReactNode;
@@ -27,20 +27,8 @@ const CarousalItem = (props: CarousalItemProps) => {
   }));
 
   return (
-    <Animated.View
-      style={[
-        {
-          width: props.itemWidth,
-          height: 100,
-          borderWidth: 1,
-          borderColor: "red",
-          opacity: 0.4,
-        },
-        activeAnimatedStyle,
-        { transform: [{ scale }] },
-      ]}
-    >
-      <TouchableOpacity style={{ height: "100%" }}>{props.children}</TouchableOpacity>
+    <Animated.View style={[props.itemStyle, activeAnimatedStyle, { transform: [{ scale }] }]}>
+      {props.children}
     </Animated.View>
   );
 };

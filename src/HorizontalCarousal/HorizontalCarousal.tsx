@@ -1,13 +1,15 @@
 import React, { Children, useState } from "react";
-import { Text, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
+
 import CarousalItem from "./CarousalItem";
 
 interface Props {
   children: React.ReactNode[];
   wrapperStyle?: ViewStyle;
+  itemStyle?: ViewStyle;
   itemWidth?: number;
   itemGap?: number;
 }
@@ -18,29 +20,26 @@ export default function HorizontalCarousal(props: Props) {
   const itemWidth = props.itemWidth || 50;
   const itemGap = props.itemGap || 10;
 
-  const pressed = useSharedValue(false);
   const offset = useSharedValue(0);
   const sharedActiveIndex = useSharedValue(0);
 
   const calculateNewOffset = (index: number) => {
-    return -index * 110;
+    return -index * (itemWidth + itemGap);
   };
 
   const pan = Gesture.Pan()
-    .onBegin(() => {
-      pressed.value = true;
-    })
+    .onBegin(() => {})
     .onChange((event) => {
       offset.value += event.changeX;
     })
     .onFinalize((event) => {
       // If slide to the left = negative value
-      if (event.translationX < 0) {
+      if (event.translationX < 0 && sharedActiveIndex.value < Children.count(props.children) - 1) {
         // If slide passes half of item width
         if (event.translationX * -1 > itemWidth / 2) {
           sharedActiveIndex.value += 1;
         }
-      } else if (event.translationX > 0) {
+      } else if (event.translationX > 0 && sharedActiveIndex.value > 0) {
         // If slide passes half of item width
         if (event.translationX > itemWidth / 2) {
           sharedActiveIndex.value -= 1;
@@ -48,15 +47,13 @@ export default function HorizontalCarousal(props: Props) {
       }
 
       const tempNewOffset = calculateNewOffset(sharedActiveIndex.value);
-      setActiveIndex(sharedActiveIndex.value);
+      setActiveIndex(sharedActiveIndex.value); //We need this just to rerender component and pass updated value to child component
       offset.value = withTiming(tempNewOffset);
-      pressed.value = false;
     });
 
   const wrapperAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        // translateX: withTiming(translateX.value),
         translateX: offset.value,
       },
     ],
@@ -78,10 +75,12 @@ export default function HorizontalCarousal(props: Props) {
         ]}
       >
         {props.children.map((children, index) => (
-          <CarousalItem itemWidth={itemWidth} index={index} activeIndex={activeIndex}>
-            <Text style={{ color: "red" }}>
-              {offset.value} , {index}
-            </Text>
+          <CarousalItem
+            itemWidth={itemWidth}
+            index={index}
+            activeIndex={activeIndex}
+            itemStyle={props.itemStyle}
+          >
             {children}
           </CarousalItem>
         ))}
