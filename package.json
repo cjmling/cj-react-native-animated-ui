@@ -1,0 +1,31 @@
+{
+  "name": "react-native-animated-ui",
+  "version": "1.0.0",
+  "description": "multiple reusuable animated ui for react-native projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "lib/"
+  ],
+  "devDependencies": {
+    "@types/react": "^18.2.31",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-plugin-react": "^7.33.2",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-native": "^0.72.6",
+    "react-native-gesture-handler": "^2.13.4",
+    "react-native-reanimated": "^3.5.4"
+  }
+}
