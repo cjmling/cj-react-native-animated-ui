@@ -1,6 +1,6 @@
 {
-  "name": "react-native-animated-ui",
-  "version": "1.0.0",
+  "name": "cj-react-native-animated-ui",
+  "version": "1.0.1",
   "description": "multiple reusuable animated ui for react-native projects",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,10 @@
   "files": [
     "lib/"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cjmling/react-native-animated-ui.git"
+  },
   "devDependencies": {
     "@types/react": "^18.2.31",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
