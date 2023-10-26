@@ -1,6 +1,6 @@
 {
   "name": "cj-react-native-animated-ui",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "multiple reusuable animated ui for react-native projects",
   "main": "./lib/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-native": "^0.72.6",
-    "react-native-gesture-handler": "^2.12.0",
-    "react-native-reanimated": "^3.3.0"
+    "react-native-gesture-handler": "2.12.0",
+    "react-native-reanimated": "3.3.0"
   }
 }
