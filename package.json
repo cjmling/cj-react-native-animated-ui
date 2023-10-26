@@ -1,6 +1,6 @@
 {
   "name": "cj-react-native-animated-ui",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "multiple reusuable animated ui for react-native projects",
   "main": "./lib/index.js",
   "scripts": {
